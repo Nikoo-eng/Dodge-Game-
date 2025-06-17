@@ -1,0 +1,35 @@
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: sans-serif;
+  background-color: #f9f9f9;
+}
+
+#Score {
+  font-size: 24px;
+  margin: 10px;
+  color: #333;
+}
+
+#Click {
+  position: absolute;
+  padding: 10px 20px;
+  border-radius: 50%;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+.obstacle {
+  width: 80px;
+  height: 80px;
+  background-color: red;
+  position: absolute;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+}
+

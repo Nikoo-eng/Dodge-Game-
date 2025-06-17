@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zap!</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="Score">امتیاز: 0</div>
+  <button id="Click">بزن</button>
+
+  
+  <div class="obstacle" id="obs1"></div>
+  <div class="obstacle" id="obs2"></div>
+  <div class="obstacle" id="obs3"></div>
+
+  <script>
+    let Score = 0;
+    const button = document.getElementById("Click");
+    const scoreDisplay = document.getElementById("Score");
+    const obstacles = [
+      document.getElementById("obs1"),
+      document.getElementById("obs2"),
+      document.getElementById("obs3")
+    ];
+
+    function isCollide(a, b) {
+      const aRect = a.getBoundingClientRect();
+      const bRect = b.getBoundingClientRect();
+      return !(
+        aRect.top > bRect.bottom ||
+        aRect.bottom < bRect.top ||
+        aRect.left > bRect.right ||
+        aRect.right < bRect.left
+      );
+    }
+
+    
+    function moveObstacle(obstacle) {
+      const x = Math.random() * (window.innerWidth - obstacle.offsetWidth);
+      const y = Math.random() * (window.innerHeight - obstacle.offsetHeight);
+      obstacle.style.left = x + "px";
+      obstacle.style.top = y + "px";
+    }
+
+  
+    const moveIntervals = obstacles.map(obs =>
+      setInterval(() => moveObstacle(obs), 500)
+    );
+
+    button.addEventListener("click", () => {
+      Score++;
+      scoreDisplay.textContent = "امتیاز: " + Score;
+
+      const x = Math.random() * (window.innerWidth - button.offsetWidth);
+      const y = Math.random() * (window.innerHeight - button.offsetHeight);
+      button.style.left = x + "px";
+      button.style.top = y + "px";
+
+      for (let i = 0; i < obstacles.length; i++) {
+        if (isCollide(button, obstacles[i])) {
+          alert("سوختی! بازی تموم شد.");
+          button.disabled = true;
+          moveIntervals.forEach(clearInterval);
+          break;
+        }
+      }
+    });
+  </script>
+</body>
+</html>
